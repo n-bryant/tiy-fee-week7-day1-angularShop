@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en' ng-app="shop">
+    <head>
+        <meta charset='UTF-8'>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <title></title>
+        <link rel="stylesheet" href="./lib/styles/main.css">
+    </head>
+    <body ng-controller="ShopController as shopCtrl">
+      <button ng-click="shopCtrl.updateNationality()" class="nation-toggle">UK/US</button>
+      <table>
+        <caption>Item Shop</caption>
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th class="color" data-nat="us">color</th>
+            <th>quantity</th>
+            <th>price</th>
+            <th>discounted</th>
+          </tr>
+          <tr class="inventory-container" ng-repeat="item in shopCtrl.allItems" data-id="{{item.id}}">
+            <td class="name" data-nat="us">{{item.name}}</td>
+            <td>{{item.color}}</td>
+            <td>{{item.quantity}}</td>
+            <td class="price" data-nat="us">{{((item.price - item.discount) + (item.price * 0.0575)) | currency : "$" : 2 }}</td>
+            <td><img ng-show="{{item.discount}}" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <script src="./lib/js/vendor/vendor.min.js"></script>
+      <script src="./src/js/app.js"></script>
+      <script src="./src/js/inventoryService.js"></script>
+    </body>
+</html>
